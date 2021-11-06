@@ -1,0 +1,94 @@
+body {
+  font-family: sans-serif;
+  margin: 0 8px;
+}
+
+#page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+#intro h1 {
+  text-align: center;
+}
+#intro p {
+  text-align: center;
+}
+
+#drop {
+  margin: 50px 10px;
+  padding: 20px 0px;
+  flex-grow: 1;
+  text-align: center;
+  justify-content: center;
+  flex-grow: 1;
+  border: 5px dashed grey;
+  border-radius: 2vh;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 2"><path d="M1 2V0h1v1H0v1z" fill-opacity=".025"/></svg>');
+  background-size: 20px 20px;
+}
+
+#drop.dragging {
+  background-image: none;
+  background-color: lightgray;
+}
+
+/* Avoid dragenter/dragleave triggering on children */
+#drop.dragging * {
+  pointer-events: none;
+}
+
+#prompt h3 {
+  margin: 0;
+  font-size: 2em;
+  font-weight: bold;
+  color: grey;
+}
+
+#prompt button {
+  display: block;
+  margin: 0 auto;
+}
+
+#current {
+  font-size: 2em;
+  display: none;
+}
+
+.preview #current {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+}
+
+.preview #prompt {
+  flex-grow: 0;
+}
+
+.preview #prompt h3 {
+  display: inline;
+  font-size: 16px;
+  font-weight: normal;
+  color: black;
+}
+
+.preview #prompt button {
+  display: inline;
+}
+
+#drop.dragging #prompt {
+  color: black;
+}
+
+#about {
+  text-align: center;
+  margin-bottom: 20px;
+}
