@@ -8,6 +8,15 @@
     />
     <meta charset="UTF-8" />
     <link href="./src/styles.css" rel="stylesheet" />
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2B3252HXYG"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-2B3252HXYG');
+    </script>
   </head>
 
   <body>
@@ -19,7 +28,7 @@
           <a href="https://en.wikipedia.org/wiki/ANI_(file_format)"
             >Windows Animated Cursor</a
           >
-          file instantly in your browser for free
+          file instantly in your browser <u>for free</u>
         </p>
       </div>
       <div id="drop">
@@ -30,17 +39,16 @@
           <button id="file-button">Choose File</button>
         </div>
       </div>
-      Try an example: <a href="#" id="example">butterfly.ani</a>
       <div id="about">
         <a
           href="https://jordaneldredge.com/blog/rendering-animated-ani-cursors-in-the-browser/"
           >How?</a
-        >
+        > &bull; Example: <a href="#" id="example">butterfly.ani</a>
         <br />
-        By <a href="https://jordaneldredge.com/">Jordan Eldredge</a>
+        &copy; <a href="https://jordaneldredge.com/">Jordan Eldredge</a>
       </div>
     </div>
 
-    <script src="src/index.js"></script>
+    <script src="./src/index.js"></script>
   </body>
 </html>

@@ -39,6 +39,7 @@ body {
 #drop.dragging {
   background-image: none;
   background-color: lightgray;
+  border-color: black;
 }
 
 /* Avoid dragenter/dragleave triggering on children */
@@ -67,6 +68,8 @@ body {
   display: flex;
   flex-grow: 1;
   align-items: center;
+  background-repeat: no-repeat;
+  background-position: center 25%;
 }
 
 .preview #prompt {
