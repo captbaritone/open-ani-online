@@ -30,17 +30,38 @@ fileButton.addEventListener("click", (e) => {
 
 input.addEventListener("change", async (e) => {
   const firstFile = input.files[0];
+  if (firstFile == null) {
+    return;
+  }
   await loadFile(firstFile);
 });
 
-document.getElementById("example").addEventListener("click", () => {
+document.getElementById("example").addEventListener("click", (e) => {
+  e.preventDefault();
   loadExample();
 });
 
 async function loadExample() {
-  const response = await fetch("assets/butterfly.ani");
+  const response = await fetch(require("/assets/butterfly.ani"));
   const buffer = await response.arrayBuffer();
   await loadArrayBuffer(buffer, "butterfly.ani");
+}
+
+// `convertAniBinaryToCSS` assumes you want CSS to make the image a cursor, this hacks it to make it a background.
+function makeCSSForBackground(css) {
+  let output = css;
+
+  const selector = ".preview:not(:hover) #current";
+  output += css
+    .replace(/cursor:/g, "background-image:")
+    .replace(/cursor:/g, "background-image:")
+    .replace(/, auto/g, "")
+    .replace(/:hover/g, "")
+    // Ensure animation names don't collide
+    .replace(/ani-cursor/g, "ani-cursor-bg")
+    .replace(/\.preview/g, selector);
+
+  return output;
 }
 
 async function loadArrayBuffer(buffer, fileName) {
@@ -50,7 +71,9 @@ async function loadArrayBuffer(buffer, fileName) {
   const arr = new Uint8Array(buffer);
   reset();
   try {
-    const css = AniCursor.convertAniBinaryToCSS(".preview", arr);
+    const css = makeCSSForBackground(
+      AniCursor.convertAniBinaryToCSS(".preview", arr)
+    );
     style.innerHTML = css;
   } catch (e) {
     alert(`Error parsing .ani file: ${e.message}`);
@@ -72,14 +95,11 @@ function populateCurrent(fileName) {
 function reset() {
   style.innerHTML = "";
   current.innerHTML = "";
+  input.value = "";
   drop.classList.remove("preview");
 }
 
 async function loadFile(file) {
-  if (file == null) {
-    alert("You must select a file");
-    return;
-  }
   const arrayBuffer = await getFileAsArrayBuffer(file);
   await loadArrayBuffer(arrayBuffer, file.name);
 }
@@ -108,6 +128,11 @@ function dropHandler(ev) {
   }
 
   const firstFile = ev.dataTransfer.files[0];
+  // TODO: Is this even possible?
+  if (firstFile == null) {
+    alert("You must drop at least one file");
+    return;
+  }
   loadFile(firstFile);
 }
 
