@@ -5,11 +5,13 @@
   "main": "index.html",
   "scripts": {
     "start": "parcel index.html --open",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html --public-url /open-ani-online",
+    "deploy": "rm -rf dist && yarn build && rsync -r --rsync-path='sudo rsync' --chown=www-data:www-data dist/ jordan:/var/www/capt.dev/public_html/open-ani-online/"
   },
   "dependencies": {
     "ani-cursor": "0.0.5",
-    "parcel-bundler": "^1.6.1"
+    "assets": "^3.0.1",
+    "parcel-bundler": "^1.12.5"
   },
   "devDependencies": {
     "@babel/core": "7.2.0"
@@ -17,5 +19,8 @@
   "resolutions": {
     "@babel/preset-env": "7.13.8"
   },
-  "keywords": []
+  "keywords": [],
+  "browserslist": [
+    "last 1 Chrome version"
+  ]
 }
